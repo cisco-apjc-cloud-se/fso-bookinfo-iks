@@ -106,7 +106,7 @@ module "terraform-intersight-iks" {
   # Cluster information
   cluster = {
     name = "tfcb-cpoc-iks-1"
-    action = "Unassign" # Unassign, Deploy
+    action = "Deploy" # Unassign, Deploy
     wait_for_completion = true
     worker_nodes = 3
     load_balancers = 5
