@@ -3,7 +3,7 @@ terraform {
     hostname = "app.terraform.io"
     organization = "mel-ciscolabs-com"
     workspaces {
-      name = "tfcb-iks-fso-bookinfo"
+      name = "fso-bookinfo-iks"
     }
   }
   required_providers {
@@ -11,20 +11,8 @@ terraform {
       source = "CiscoDevNet/intersight"
       # version = "1.0.12"
     }
-    helm = {
-      source = "hashicorp/helm"
-      # version = "2.0.2"
-    }
-    kubernetes = {
-      source = "hashicorp/kubernetes"
-    }
   }
 }
-//
-// ### Define Kube Config as Local ###
-// locals {
-//   kube_config = data.intersight_kubernetes_cluster.iks.results[0].kube_config
-// }
 
 ### Providers ###
 provider "intersight" {
@@ -34,46 +22,10 @@ provider "intersight" {
   endpoint =  var.intersight_url
 }
 
-locals {
-  // kube_config = yamldecode(base64decode(data.intersight_kubernetes_cluster.iks.results[0].kube_config))
-  kube_config = base64decode(data.intersight_kubernetes_cluster.iks.results[0].kube_config)
-}
-
-// provider "kubernetes" {
-//   # alias = "iks-k8s"
-//
-//   host                   = local.kube_config.clusters[0].cluster.server
-//   cluster_ca_certificate = base64decode(local.kube_config.clusters[0].cluster.certificate-authority-data)
-//   client_certificate     = base64decode(local.kube_config.users[0].user.client-certificate-data)
-//   client_key             = base64decode(local.kube_config.users[0].user.client-key-data)
-// }
-
-provider "kubernetes" {
-  // config_path = data.intersight_kubernetes_cluster.iks.results[0].kube_config
-  config_path = local.kube_config
-}
-
-
-provider "helm" {
-  kubernetes {
-    // config_path = data.intersight_kubernetes_cluster.iks.results[0].kube_config
-    config_path = local.kube_config
-  }
-}
-
-
 ### Intersight Organization ###
 data "intersight_organization_organization" "org" {
   name = var.org_name
 }
-
-
-## See the following additional Terraform modules
-# - IKS
-#   Deploys new Intersight Kubernetes Service (IKS) cluster for on-premise K8S
-# - Helm (and Kubernetes)
-#   - Creates IWO namespace & deploys IWO release
-
 
 ## IKS Module ##
 module "terraform-intersight-iks" {
@@ -185,13 +137,13 @@ module "terraform-intersight-iks" {
 
   # Cluster information
   cluster = {
-    name = "tfcb-cpoc-iks-1"
+    name = var.cluster_name
     action = "Deploy" # Unassign, Deploy
     wait_for_completion = true
-    worker_nodes = 3
-    load_balancers = 5
-    worker_max = 4
-    control_nodes = 1
+    worker_nodes = var.worker_nodes
+    load_balancers = var.load_balancer_ips
+    worker_max = var.worker_nodes_max
+    control_nodes = var.control_nodes
     ssh_user        = var.ssh_user
     ssh_public_key  = var.ssh_key
   }
@@ -205,19 +157,6 @@ module "terraform-intersight-iks" {
 ### Read Target IKS Cluster Details ###
 data "intersight_kubernetes_cluster" "iks" {
   // moid = module.terraform-intersight-iks.cluster_moid
-  name = "tfcb-cpoc-iks-1"
-}
-
-
-### Helm Module ###
-module "helm" {
-  source = "./modules/helm"
-
-  // config_path = data.intersight_kubernetes_cluster.iks.results[0].kube_config
-  // host                   = data.aws_eks_cluster.vault.endpoint
-  // cluster_ca_certificate = base64decode(data.aws_eks_cluster.vault.certificate_authority.0.data)
-  // token                  = data.aws_eks_cluster_auth.vault.token
-
+  name = var.cluster_name
   depends_on = [module.terraform-intersight-iks]
-
 }

@@ -43,8 +43,22 @@ variable "tags" {
 }
 
 
-// ### Kubernetes Variables
-//
-// variable "config_path" {
-//
-// }
+variable "cluster_name" {
+  type = string
+}
+
+variable "worker_nodes" {
+  type = number
+}
+
+variable "worker_nodes_max" {
+  type = number
+}
+
+variable "control_nodes" {
+  type = number
+}
+
+variable "load_balancer_ips" {
+  type = number
+}
