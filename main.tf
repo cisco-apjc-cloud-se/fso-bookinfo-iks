@@ -140,7 +140,7 @@ module "terraform-intersight-iks" {
     name = var.cluster_name
 
     ## Tries to deploy before profile is complete...
-    action = "Unassign" # Unassign, Deploy
+    action = "Deploy" # Unassign, Deploy
     wait_for_completion = true
     worker_nodes = var.worker_nodes
     load_balancers = var.load_balancer_ips
