@@ -186,10 +186,10 @@ module "terraform-intersight-iks" {
 
 }
 
-// ### Read Target IKS Cluster Details ###
-// data "intersight_kubernetes_cluster" "iks" {
-//   moid = module.terraform-intersight-iks.cluster_moid
-// }
+### Read Target IKS Cluster Details ###
+data "intersight_kubernetes_cluster" "iks" {
+  moid = module.terraform-intersight-iks.cluster_moid
+}
 
 
 // ### Helm Module ###
