@@ -138,7 +138,7 @@ module "terraform-intersight-iks" {
   # Cluster information
   cluster = {
     name = var.cluster_name
-    action = "Deploy" # Unassign, Deploy
+    action = "Unassign" # Unassign, Deploy
     wait_for_completion = true
     worker_nodes = var.worker_nodes
     load_balancers = var.load_balancer_ips
