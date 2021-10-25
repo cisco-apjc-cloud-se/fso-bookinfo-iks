@@ -34,16 +34,16 @@ provider "intersight" {
   endpoint =  var.intersight_url
 }
 
-// provider "kubernetes" {
-//   config_path = data.intersight_kubernetes_cluster.iks.results[0].kube_config
-// }
-//
-//
-// provider "helm" {
-//   kubernetes {
-//     config_path = data.intersight_kubernetes_cluster.iks.results[0].kube_config
-//   }
-// }
+provider "kubernetes" {
+  config_path = data.intersight_kubernetes_cluster.iks.results[0].kube_config
+}
+
+
+provider "helm" {
+  kubernetes {
+    config_path = data.intersight_kubernetes_cluster.iks.results[0].kube_config
+  }
+}
 
 
 ### Intersight Organization ###
@@ -193,15 +193,15 @@ data "intersight_kubernetes_cluster" "iks" {
 }
 
 
-// ### Helm Module ###
-// module "helm" {
-//   source = "./modules/helm"
-//
-//   // config_path = data.intersight_kubernetes_cluster.iks.results[0].kube_config
-//   // host                   = data.aws_eks_cluster.vault.endpoint
-//   // cluster_ca_certificate = base64decode(data.aws_eks_cluster.vault.certificate_authority.0.data)
-//   // token                  = data.aws_eks_cluster_auth.vault.token
-//
-//   depends_on = [module.terraform-intersight-iks]
-//
-// }
+### Helm Module ###
+module "helm" {
+  source = "./modules/helm"
+
+  // config_path = data.intersight_kubernetes_cluster.iks.results[0].kube_config
+  // host                   = data.aws_eks_cluster.vault.endpoint
+  // cluster_ca_certificate = base64decode(data.aws_eks_cluster.vault.certificate_authority.0.data)
+  // token                  = data.aws_eks_cluster_auth.vault.token
+
+  depends_on = [module.terraform-intersight-iks]
+
+}
