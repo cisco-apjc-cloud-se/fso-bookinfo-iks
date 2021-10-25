@@ -35,7 +35,8 @@ provider "intersight" {
 }
 
 locals {
-  kube_config = yamldecode(base64decode(data.intersight_kubernetes_cluster.iks.results[0].kube_config))
+  // kube_config = yamldecode(base64decode(data.intersight_kubernetes_cluster.iks.results[0].kube_config))
+  kube_config = base64decode(data.intersight_kubernetes_cluster.iks.results[0].kube_config)
 }
 
 // provider "kubernetes" {
