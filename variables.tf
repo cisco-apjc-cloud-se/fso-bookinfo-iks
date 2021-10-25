@@ -41,3 +41,10 @@ variable "tags" {
   type    = list(map(string))
   default = []
 }
+
+
+// ### Kubernetes Variables
+//
+// variable "config_path" {
+//
+// }
