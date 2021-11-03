@@ -34,8 +34,8 @@ module "terraform-intersight-iks" {
   ip_pool = {
     use_existing = false
     name = "tf-iks-asr-gw"
-    ip_starting_address = "100.64.62.51"
-    ip_pool_size        = "9"
+    ip_starting_address = "100.64.62.200"
+    ip_pool_size        = "20"
     ip_netmask          = "255.255.255.0"
     ip_gateway          = "100.64.62.9"
     dns_servers         = ["100.64.62.199","8.8.8.8"]
