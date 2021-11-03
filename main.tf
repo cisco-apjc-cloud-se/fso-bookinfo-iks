@@ -111,6 +111,13 @@ module "terraform-intersight-iks" {
   }
 
   addons_list = [
+    {
+     addon_policy_name = "iks-smm"
+     addon             = "smm"
+     description       = "K8s Dashboard Policy"
+     upgrade_strategy  = "UpgradeOnly"
+     install_strategy  = "Always"
+    }
     # {
     # addon_policy_name = "dashboard"
     # addon             = "kubernetes-dashboard"
