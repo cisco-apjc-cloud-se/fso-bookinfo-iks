@@ -32,13 +32,13 @@ module "terraform-intersight-iks" {
   source = "terraform-cisco-modules/iks/intersight//"
 
   ip_pool = {
-    use_existing = true
-    name = "iks-cpoc-asr-gw"
-    # ip_starting_address = "10.139.120.220"
-    # ip_pool_size        = "20"
-    # ip_netmask          = "255.255.255.0"
-    # ip_gateway          = "10.139.120.1"
-    # dns_servers         = ["10.101.128.15"]
+    use_existing = false
+    name = "tf-iks-asr-gw"
+    ip_starting_address = "100.64.62.51"
+    ip_pool_size        = "9"
+    ip_netmask          = "255.255.255.0"
+    ip_gateway          = "100.64.62.9"
+    dns_servers         = ["100.64.62.199","8.8.8.8"]
   }
 
   sysconfig = {
@@ -52,7 +52,7 @@ module "terraform-intersight-iks" {
 
   k8s_network = {
     use_existing = false
-    name = "default"
+    name = "k8s-172"
     ######### Below are the default settings.  Change if needed. #########
     pod_cidr = "172.31.0.0/16"
     service_cidr = "172.30.0.0/16"
