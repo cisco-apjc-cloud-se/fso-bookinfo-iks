@@ -54,8 +54,8 @@ module "terraform-intersight-iks" {
     use_existing = false
     name = "default"
     ######### Below are the default settings.  Change if needed. #########
-    pod_cidr = "100.65.0.0/16"
-    service_cidr = "100.64.0.0/24"
+    pod_cidr = "172.31.0.0/16"
+    service_cidr = "172.30.0.0/16"
     cni = "Calico"
   }
 
