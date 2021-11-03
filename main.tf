@@ -114,7 +114,7 @@ module "terraform-intersight-iks" {
     {
      addon_policy_name = "iks-smm"
      addon             = "smm"
-     description       = "K8s Dashboard Policy"
+     description       = "Service Mesh Manager"
      upgrade_strategy  = "UpgradeOnly"
      install_strategy  = "Always"
     }
