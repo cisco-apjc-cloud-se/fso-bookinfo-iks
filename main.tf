@@ -33,7 +33,7 @@ module "terraform-intersight-iks" {
 
   ip_pool = {
     use_existing = true
-    name = "iks-cpoc-ip"
+    name = "iks-cpoc-asr-gw"
     # ip_starting_address = "10.139.120.220"
     # ip_pool_size        = "20"
     # ip_netmask          = "255.255.255.0"
