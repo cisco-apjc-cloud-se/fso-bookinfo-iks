@@ -98,23 +98,31 @@ module "terraform-intersight-iks" {
   #   https_proxy_password = null
   # }
 
-  # Infra Config Policy Information (version <2.0.4)
-  infra_config_policy = {
-    use_existing = true
-    name = "cpoc-hx"
-    # vc_target_name = "marvel-vcsa.rich.ciscolabs.com"
-    # vc_portgroups    = ["panther|iks|tme"]
-    # vc_datastore     = "iks"
-    # vc_cluster       = "tchalla"
-    # vc_resource_pool = ""
-    # vc_password      = var.vc_password
-  }
-
-  # Version 2.0.4+
-  // infraConfigPolicy = {
+  // # Infra Config Policy Information
+  // infra_config_policy = {
   //   use_existing = true
-  //   policyName = "cpoc-hx"
+  //   name = "cpoc-hx"
+  //   # vc_target_name = "marvel-vcsa.rich.ciscolabs.com"
+  //   # vc_portgroups    = ["panther|iks|tme"]
+  //   # vc_datastore     = "iks"
+  //   # vc_cluster       = "tchalla"
+  //   # vc_resource_pool = ""
+  //   # vc_password      = var.vc_password
   // }
+
+  infraConfigPolicy = {
+    use_existing = true
+    # platformType = "iwe"
+    # targetName   = "falcon"
+    policyName   = "cpoc-hx"
+    # description  = "Test Policy"
+    # interfaces   = ["iwe-guests"]
+    # vcTargetName   = optional(string)
+    # vcClusterName      = optional(string)
+    # vcDatastoreName     = optional(string)
+    # vcResourcePoolName = optional(string)
+    # vcPassword      = optional(string)
+  }
 
   addons_list = [
     {
@@ -154,7 +162,7 @@ module "terraform-intersight-iks" {
 
     ## Tries to deploy before profile is complete...
     action = "Deploy" # Unassign, Deploy
-    wait_for_completion = true
+    // wait_for_completion = true
     worker_nodes = var.worker_nodes
     load_balancers = var.load_balancer_ips
     worker_max = var.worker_nodes_max

@@ -5,7 +5,7 @@ output "kube_config" {
   sensitive = true
 }
 
-output "cluster_moid" {
-  value = module.terraform-intersight-iks.cluster_moid
-  sensitive = false
-}
+// output "cluster_moid" {
+//   value = module.terraform-intersight-iks.cluster_moid
+//   sensitive = false
+// }
