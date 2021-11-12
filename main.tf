@@ -99,7 +99,8 @@ module "terraform-intersight-iks" {
   # }
 
   # Infra Config Policy Information
-  infra_config_policy = {
+  // infra_config_policy = {
+  infraConfigPolicy = {
     use_existing = true
     name = "cpoc-hx"
     # vc_target_name = "marvel-vcsa.rich.ciscolabs.com"
