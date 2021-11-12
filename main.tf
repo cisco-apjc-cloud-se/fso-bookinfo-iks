@@ -98,17 +98,21 @@ module "terraform-intersight-iks" {
   #   https_proxy_password = null
   # }
 
-  # Infra Config Policy Information
+  // # Infra Config Policy Information
   // infra_config_policy = {
+  //   use_existing = true
+  //   name = "cpoc-hx"
+  //   # vc_target_name = "marvel-vcsa.rich.ciscolabs.com"
+  //   # vc_portgroups    = ["panther|iks|tme"]
+  //   # vc_datastore     = "iks"
+  //   # vc_cluster       = "tchalla"
+  //   # vc_resource_pool = ""
+  //   # vc_password      = var.vc_password
+  // }
+
   infraConfigPolicy = {
     use_existing = true
-    name = "cpoc-hx"
-    # vc_target_name = "marvel-vcsa.rich.ciscolabs.com"
-    # vc_portgroups    = ["panther|iks|tme"]
-    # vc_datastore     = "iks"
-    # vc_cluster       = "tchalla"
-    # vc_resource_pool = ""
-    # vc_password      = var.vc_password
+    policyName = "cpoc-hx"
   }
 
   addons_list = [
