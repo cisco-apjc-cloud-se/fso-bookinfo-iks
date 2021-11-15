@@ -150,7 +150,7 @@ module "terraform-intersight-iks" {
 
   instance_type = {
     use_existing = true
-    name = "rw-iks-vm-type"
+    name = "rw-iks-smm-large"
     # cpu = 4
     # memory = 16386
     # disk_size = 40
