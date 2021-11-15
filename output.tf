@@ -2,7 +2,7 @@
 output "kube_config" {
   // value = data.intersight_kubernetes_cluster.cluster.results[0].kube_config
   value = data.intersight_kubernetes_cluster.iks.results[0].kube_config
-  sensitive = true
+  sensitive = false
 }
 
 // output "cluster_moid" {
