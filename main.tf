@@ -161,7 +161,7 @@ module "terraform-intersight-iks" {
     name = var.cluster_name
 
     ## Tries to deploy before profile is complete...
-    action = "Deploy" # Unassign, Deploy
+    action = "Unassign" # Unassign, Deploy
 
     ## Note: You cannot assign the cluster action as "Deploy" and "wait_for_completion" as TRUE at the same time.
     wait_for_completion = false
